@@ -324,13 +324,7 @@ if __name__ == '__main__':
     netinstall_parser = subparsers.add_parser('netinstall',help='patch netinstall file')
     netinstall_parser.add_argument('input',type=str, help='Input file')
     netinstall_parser.add_argument('-O','--output',type=str,help='Output file')
-    args = parser.parse_args()
-    key_dict = {
-        bytes.fromhex(os.environ['MIKRO_LICENSE_PUBLIC_KEY']):bytes.fromhex(os.environ['CUSTOM_LICENSE_PUBLIC_KEY']),
-        bytes.fromhex(os.environ['MIKRO_NPK_SIGN_PUBLIC_LKEY']):bytes.fromhex(os.environ['CUSTOM_NPK_SIGN_PUBLIC_KEY'])
-    }
-    kcdsa_private_key = bytes.fromhex(os.environ['CUSTOM_LICENSE_PRIVATE_KEY'])
-    eddsa_private_key = bytes.fromhex(os.environ['CUSTOM_NPK_SIGN_PRIVATE_KEY'])
+    args = parser.parse_args() 
     if args.command =='npk':
         print(f'patching {args.input} ...')
         patch_npk_file(key_dict,kcdsa_private_key,eddsa_private_key,args.input,args.output)
