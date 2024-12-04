@@ -325,21 +325,5 @@ if __name__ == '__main__':
     netinstall_parser.add_argument('input',type=str, help='Input file')
     netinstall_parser.add_argument('-O','--output',type=str,help='Output file')
     args = parser.parse_args() 
-    if args.command =='npk':
-        print(f'patching {args.input} ...')
-        patch_npk_file(key_dict,kcdsa_private_key,eddsa_private_key,args.input,args.output)
-    elif args.command == 'kernel':
-        print(f'patching {args.input} ...')
-        data = patch_kernel(open(args.input,'rb').read(),key_dict)
-        open(args.output or args.input,'wb').write(data)
-    elif args.command == 'block':
-        print(f'patching {args.file} in {args.dev} ...')
-        patch_block(args.dev,args.file,key_dict)
-    elif args.command == 'netinstall':
-        print(f'patching {args.input} ...')
-        patch_netinstall(key_dict,args.input,args.output)
-    else:
-        parser.print_help()
-
 
     
